@@ -77,14 +77,8 @@ xy_coords <- function(end_length){
                  y = ys[1:(end_length+1)])
 }
 
-# number of factors a number has; deeply inefficient
+# number of factors a number has; now more efficient but allocates more memory
 num_factors <- function(x) {
-  nfactors <- 0
   if(x == 0){x <- 1} # cludge
-  for(i in 1:x) {
-    if((x %% i) == 0) {
-      nfactors <- nfactors + 1
-    }
-  }
-  return(nfactors)
+  return(sum((x %% 1:x) == 0))
 }
